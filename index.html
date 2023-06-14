@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<meta name="Author" content="Denis A">
+	<meta name="Copyright" content="Denis A">
+	<meta name="Address" content="Санкт-Петербург">
+
+	<!--Политика 'interest-cohort' разрешений позволяет сайту заявить, что он не хочет быть включенным в список сайтов, на которых Google тестирует свою технологию FLoC (замена файлов cookie)-->
+	<meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+
+
+	<link rel="stylesheet" href="styles/style.css">
+	<title>Простой блог</title>
+	<link rel="shortcut icon" href="resourses/img/icon/favicon.ico"/>
+</head>
+<body>
+	<header class="header">
+		<h1 class="header__title">
+			Простой БЛОГ
+		</h1>
+	</header>
+
+	<main class="page">
+		<section class="new-post">
+			<div class="new-post__wrapper">
+				<h2 class="new-post__title title">
+					Новый пост
+				</h2>
+				<form action="" class="new-post__form">
+					<div class="input">
+						<input id="inputTitle" name="title" type="text" placeholder="Напиши заголовок поста" class="input__title" tabindex="1">
+						<div class="input__title-notice">
+							<label for="inputTitle" id="inputTitleError" class="input__title-error"></label>
+							<label for="inputTitle" id="inputTitleLengthCounter" class="input__title-length"></label>
+						</div>
+						<textarea name="description" id="inputDescription" class="input__description" placeholder="Напиши текст поста" tabindex="2"></textarea>
+						<div class="input__description-notice">
+							<label for="inputDescription" id="inputDescriptionError" class="input__description-error"></label>
+							<label for="inputDescription" id="inputDescriptionLengthCounter" class="input__description-length"></label>
+						</div>
+					</div>
+					<div id="error" class="new-post__error"></div>
+					<div class="button">
+						<button id="buttonReset" type="reset" class="button__reset" tabindex="4">Очистить</button>
+						<button id="buttonSubmit" type="button" class="button__submit button__disabled" tabindex="3">Опубликовать</button>
+					</div>
+					</div>
+				</form>
+				
+		</section>
+
+		<section class="feed">
+			<div class="feed__wrapper">
+				<h2 class="feed__title title">
+					Лента
+				</h2>
+				<div id="feed" class="posts__wrapper">
+					Постов пока не было... Стоит добавить!
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<div class="footer__telegram">
+			<a target="_blank" href="https://t.me/Denis_Bear_A">@Denis_Bear_A</a>
+		</div>
+		<div class="footer__cr">
+			SC.CODE — 2023
+		</div>
+	</footer>
+	
+	<!--<div class="post">
+			<p class="post__date">20.05.2023 11:00</p>
+			<h3 class="post__title">Привет Мир</h3>
+			<p class="post__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam aliquet auctor iaculis. Aliquam viverra ultrices dui. Aenean dolor dolor, congue eget congue non, varius non urna.</p>
+		</div>-->
+
+	<script src="js/index.js"></script>
+</body>
+</html>
