@@ -1,16 +1,17 @@
 
-@import url(https://fonts.googleapis.com/css?family=Inter:regular,700);
+@import url(https://fonts.googleapis.com/css?family=Tahoma:regular,700);
 
-$fontfamily: "Inter", sans-serif;
+$fontfamily: "Tahoma", sans-serif;
 
 @import "_nullstyle";
 
 body {
 	width: 100%;
-	background: linear-gradient(90deg, #cde6f0, #d8d8d8);
+	background: linear-gradient(90deg, #ec9edb, #d6c3c3);
 	font-family: $fontfamily;
 	font-weight: 400;
 }
+
 
 .header {
 	padding: 15px 0 10px;
@@ -20,7 +21,7 @@ body {
 		font-weight: 700;
 		font-size: 40px;
 		line-height: 48px;
-		color: rgb(28, 101, 160);
+		color: rgb(110, 4, 4);
 	}
 }
 
@@ -32,7 +33,7 @@ body {
 	margin-top: 20px;
 	padding: 15px;
 	gap: 15px 50px;
-	color: rgb(65, 64, 64);
+	color: rgb(49, 49, 49);
 
 	&__telegram {}
 
@@ -40,13 +41,13 @@ body {
 }
 
 .page {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: flex-start;
-	gap: 20px 50px;
+	//display: flex;
+	//flex-wrap: wrap;
+	//justify-content: center;
+	//align-items: flex-start;
+	//gap: 20px 50px;
 	margin: 0 auto;
-	max-width: 1080px;
+	max-width: 750px;
 	padding: 15px;
 }
 
@@ -58,236 +59,6 @@ body {
 	line-height: 40px;
 }
 
-.new-post {
-
-	&__wrapper {
-		width: min(500px, calc(100vw - 30px));
-		background: linear-gradient(90deg, #e0ecf1, #e7e7e7) padding-box,
-			linear-gradient(90deg, #9ad0e6,#b3b1b1) border-box;
-		border: 5px solid transparent;
-		border-radius: 10px;
-		padding: 20px 25px;
-	}
-
-	&__title {		
-	}
-
-	&__form {
-	}
-
-	&__error {
-		margin-bottom: 20px;
-		height: 14px;
-		text-align: center;
-		font-size: 14px;
-		line-height: 14px;
-		font-weight: 700;
-		color: rgb(218, 19, 19);
-	}
-}
-
-.input {
-
-
-	&__title {
-		display: block;
-		width: 100%;
-		margin-bottom: 10px;
-		padding: 5px;
-		background: inherit;
-		border: 1px solid rgb(197, 197, 197);
-		border-radius: 5px;
-		word-wrap: break-word;
-		font-size: 16px;
-		line-height: 28px;	
-	}
-
-	&__title:focus {
-		border: 1px solid rgb(132, 155, 204);
-	}
-
-	&__description {
-		display: block;
-		width: 100%;
-		height: 210px;
-		resize: none;
-		margin-bottom: 10px;
-		padding: 5px;
-		background: inherit;
-		border: 1px solid rgb(197, 197, 197);
-		border-radius: 5px;
-		font-size: 16px;
-		line-height: 28px;
-	}
-
-	&__description:focus {
-		border: 1px solid rgb(132, 155, 204);
-	}
-
-	&__title-notice,
-	&__description-notice {
-		display: flex;
-		justify-content: space-between;
-		margin-bottom: 14px;
-	}
-
-	&__title-error,
-	&__title-length,
-	&__description-error,
-	&__description-length {
-		display: block;
-		height: 14px;
-		text-align: center;
-		font-size: 10px;
-		line-height: 14px;
-	}
-
-	&__title-error,
-	&__description-error {
-		color: rgb(44, 18, 189);
-	}
-
-	/*&__title-length_error,
-	&__description-length_error {
-		color: rgb(218, 19, 19);
-	}*/
-}
-
-.button {
-	display: flex;
-	justify-content: space-between;
-
-	&__reset {
-		display: block;
-		background-color: indianred;
-		border: 1px solid indianred;
-		border-radius: 5px;
-		padding: 0 7px;
-		color: aliceblue;
-		font-size: 16px;
-		line-height: 28px;
-	}
-
-	&__reset:focus {
-		border: 1px solid red;
-	}
-
-	&__submit {
-		display: block;
-		background-color: mediumslateblue;
-		border: 1px solid mediumslateblue;
-		border-radius: 5px;
-		padding: 0 7px;
-		color: aliceblue;
-		font-size: 16px;
-		line-height: 28px;
-	}
-	
-	&__submit:focus {
-		border: 1px solid blue;
-	}
-
-	&__reset:hover,
-	&__submit:hover {
-		box-shadow: 0px 3px 3px 2px rgba(0, 0, 0, 0.4);
-		transform: translateY(-1px);
-		transition: all 300ms ease;
-	}
-
-	&__disabled {
-		background-color: dimgray;
-		border: 1px solid dimgray;
-	}
-
-	&__disabled:hover,
-	&__disabled:hover {
-		box-shadow: none;
-		transform: translateY(0);
-	}
-}
-
-.feed {
-	align-self: stretch;
-
-	&__wrapper {
-		position: relative;
-		width: min(500px, calc(100vw - 30px));
-		max-height: 507px;
-		background: linear-gradient(90deg, #e0ecf1, #e7e7e7) padding-box, linear-gradient(90deg, #9ad0e6, #b3b1b1) border-box;
-		border: 5px solid transparent;
-		border-radius: 10px;
-		padding: 0 25px 20px;
-		overflow-y: auto;
-
-		//!настройка скролл-барра
-		//скроллбары в Chrome/Edge/Safari
-		&::-webkit-scrollbar {
-			width: 8px; /* ширина scrollbar */
-		}
-	
-		&::-webkit-scrollbar-track {
-			background: #9ad0e6; /* цвет дорожки */
-			border-radius: 50px; /* закругления дрожки */
-		}
-	
-		&::-webkit-scrollbar-thumb {
-			background-color: #b3b1b1; /* цвет плашки */
-			border-radius: 50px; /* закругления плашки */
-			border: 2px solid #9ad0e6; /* padding вокруг плашки */
-		}
-
-		//скроллбары в Fifefox	
-		scrollbar-width: thin; /* "auto" или "thin"  */
-		scrollbar-color: #b3b1b1 #9ad0e6; /* плашка скролла и дорожка */
-
-	}
-
-	&__title {
-		position: sticky;
-		top: 0;
-		background: linear-gradient(90deg, #e0ecf1, #e7e7e7) padding-box, linear-gradient(90deg, #9ad0e6, #b3b1b1) border-box;
-		padding-top: 20px;
-	}
-}
-
-.posts {
-
-	&__wrapper {
-		display: flex;
-		flex-direction: column-reverse;
-	}
-}
-
-.post {
-	margin-bottom: 20px;
-	border-bottom: 1px solid rgb(197, 197, 197);
-
-	&:first-child {
-		margin-bottom: 0;
-		border-bottom: none;
-	}
-
-	&__date {
-		margin-bottom: 10px;
-		font-size: 14px;
-		line-height: 20px;
-		color: rgb(69, 121, 218);
-	}
-
-	&__title {
-		margin-bottom: 10px;
-		word-wrap: break-word;
-		white-space: pre-line;
-		font-size: 18px;
-		line-height: 24px;
-	}
-
-	&__description {
-		margin-bottom: 10px;
-		word-wrap: break-word;
-		white-space: pre-line;
-		font-size: 14px;
-		line-height: 20px;
-		font-style: oblique;
-	}
+.story__list-item {
+	list-style-type: decimal;
 }
