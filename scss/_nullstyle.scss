@@ -9,7 +9,7 @@ html,body{height:100%;min-width:320px;}
 body{font-family:$fontfamily;line-height: 1;font-size: 14px;-ms-text-size-adjust: 100%;-moz-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;}
 input,button,textarea{font-family:$fontfamily;}
 input::-ms-clear{display: none;}
-button{cursor: pointer;}
+button{cursor: pointer;color: inherit;background-color: inherit;}
 button::-moz-focus-inner{padding:0;border:0;}
 a,a:visited{text-decoration: none;color: inherit;}
 a:hover{text-decoration: none;}

@@ -9,6 +9,22 @@
 	<meta name="Copyright" content="Denis A">
 	<meta name="Address" content="Санкт-Петербург">
 
+	<meta property="og:locale" content="ru_RU">
+	<meta property="og:type" content="article">
+	<meta property="og:site_name" content="Простой счетчик расходов">
+	<meta property="og:title" content="Счетчик расходов">
+	<meta property="og:description" content="Простой счетчик расходов">
+	<meta property="og:image"
+		content="resourses/img/icon/seo.jpg">
+	<meta property="og:url" content="https://denisanf.github.io/expenses-app">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="Denis A">
+	<meta name="twitter:title" content="Счетчик расходо">
+	<meta name="twitter:description" content="Простой счетчик расходов">
+	<meta name="twitter:image"
+		content="resourses/img/icon/seo.jpg">
+
 	<!--Политика 'interest-cohort' разрешений позволяет сайту заявить, что он не хочет быть включенным в список сайтов, на которых Google тестирует свою технологию FLoC (замена файлов cookie)-->
 	<meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 
@@ -27,12 +43,12 @@
 		<section class="input">
 			<form action="" class="input__form">
 				<div class="input__value-wrapper">
-					<input id="inputValue" type="number" min="1" class="input__value">
-					<span class="input__value-currency currency">
+					<input id="inputValue" type="number" min="1" class="input__value" placeholder="Введите сумму" tabindex="1">
+					<span class="input__value-currency">
 						руб.
 					</span>
 				</div>
-				<input id="inputCategories" list="categories" class="input__categories">
+				<input id="inputCategories" type="text" list="categories" class="input__categories" placeholder="Выберите категорию" tabindex="2">
 				<datalist id="categories" class="input__categories-datalist">
 					<option value="Транспорт"></option>
 					<option value="Кафе и рестораны"></option>
@@ -41,71 +57,102 @@
 				</datalist>
 				<details class="input__explanation">
 					<summary>
-						Как выбрать категорию?
+						Примечание по выбору категории
 					</summary>
 					<p>
-						Ты можешь выбрать категорию расходов из списка или написать другую
+						Ты можешь выбрать категорию расходов из списка или написать любую другую длиной до 20 символов
 					</p>
 				</details>
 			</form>
-			<button id="inputButton" type="button" class="input__button">Добавить</button>
+			<div class="input__teg">
+				<button id="inputButton" type="button" class="input__button" tabindex="3">Добавить</button>
+				<p class="input__error">Выберетие категорию</p>
+			</div>
+			
 		</section>
-		<section class="status">
-			<div class="status__limit">
-				<span class="status__limit-title title">
-					Лимит:
-				</span>
-				<span id="limitValue" class="status__limit-value value">
-					10000
-				</span>
-				<span class="status__limit-currency currency">
-					руб.
-				</span>
-			</div>
-			<div class="status__sum">
-				<span class="status__sum-title title">
-					Всего:
-				</span>
-				<span id="sumValue" class="status__sum-value value">
-					10000
-				</span>
-				<span class="status__sum-currency currency">
-					руб.
-				</span>
-				<button type="button">Изменить лимит</button>
-			</div>
-			<div class="status__output">
-				<span class="status__output-title title">
-					Статус:
-				</span>
-				<span id="statusOutput" class="status__output-conclusion">
-					все хорошо
-				</span>
-			</div>
-			<dialog class="limit">
-				<form action="" class="limit__form">
-				<input id="limitValue" type="number" min="1" class="limit__value">
-				<button id="limitAddButton" type="button" class="limit__add-button">Задать лимит</button>
-				<button id="limitCloseButton" type="button" class="limit__close-button">Закрыть</button>
-				</form>
-			</dialog>
-		</section>
-		<section class="story">
-			<button id="storyButtonClear" type="button" class="story__button-clear">
-				Сбросить расходы
-			</button>
-			<h2 class="story__title title">
-				История расходов
-			</h2>
-			<div id="storyOutput" class="story__output">
-				<ul class="story__list">
-					<li class="story__list-item">100 руб. - Транспорт</li>
-					<li class="story__list-item">200 руб. - Кафе и рестораны</li>
-					<li class="story__list-item">300 руб. - Аптека</li>
-					<li class="story__list-item">4444400 руб. - Развлечения</li>
-				</ul>
-			</div>
-		</section>
+		<div class="output__wrapper">
+			<section class="status">
+				<div class="status__limit">
+					<span class="status__limit-title title">
+						Лимит:
+					</span>
+					<span id="limitValue" class="status__limit-value">
+						10000
+					</span>
+					<span class="status__limit-currency">
+						руб.
+					</span>
+					<button id="limitOpenButton" class="status__button" type="button"></button>
+				</div>
+				<div class="status__sum">
+					<span class="status__sum-title title">
+						Всего:
+					</span>
+					<span id="sumValue" class="status__sum-value">
+						0
+					</span>
+					<span class="status__sum-currency">
+						руб.
+					</span>
+				</div>
+				<div class="status__output">
+					<span class="status__output-title title">
+						Статус:
+					</span>
+					<span id="statusOutput" class="status__output-conclusion ">
+						все хорошо
+					</span>
+				</div>
+				<dialog id="dialogLimit" class="limit">
+					<h2 class="limit__title title">Новый лимит</h2>
+					<form action="" class="limit__form">
+						<div class="limit__value-wrapper">
+							<input id="limitValue" type="number" min="1" class="limit__value" placeholder="Введите новый лимит">
+							<span class="limit__value-currency">руб.</span>
+						</div>
+						<button id="limitAddButton" type="button" class="limit__add-button" tabindex="4">Задать лимит</button>
+					</form>
+					<button id="limitCloseButton" type="button" class="limit__close-button"></button>
+				</dialog>
+				<button id="storyButtonClear" type="button" class="story__button-clear" tabindex="5">
+					Сбросить расходы
+				</button>
+			</section>
+			<section class="story">
+				
+				<h2 class="story__title title">
+					История расходов:
+				</h2>
+				<div id="storyOutput" class="story__output">
+					<ol class="story__list">
+						<li class="story__list-item">100 руб. - Транспорт</li>
+						<li class="story__list-item">200 руб. - Кафе и рестораны</li>
+						<li class="story__list-item">300 руб. - Аптека</li>
+						<li class="story__list-item">4444400 руб. - Lorem ipsum dolor sit</li>
+						<li class="story__list-item">100 руб. - Транспорт</li>
+						<li class="story__list-item">200 руб. - Кафе и рестораны</li>
+						<li class="story__list-item">300 руб. - Аптека</li>
+						<li class="story__list-item">4444400 руб. - Lorem ipsum dolor sit</li>
+						<li class="story__list-item">100 руб. - Транспорт</li>
+						<li class="story__list-item">200 руб. - Кафе и рестораны</li>
+						<li class="story__list-item">300 руб. - Аптека</li>
+						<li class="story__list-item">4444400 руб. - Lorem ipsum dolor sit</li>
+						<li class="story__list-item">100 руб. - Транспорт</li>
+						<li class="story__list-item">200 руб. - Кафе и рестораны</li>
+						<li class="story__list-item">300 руб. - Аптека</li>
+						<li class="story__list-item">4444400 руб. - Lorem ipsum dolor sit</li>
+						<li class="story__list-item">100 руб. - Транспорт</li>
+						<li class="story__list-item">200 руб. - Кафе и рестораны</li>
+						<li class="story__list-item">300 руб. - Аптека</li>
+						<li class="story__list-item">4444400 руб. - Lorem ipsum dolor sit</li>
+						<li class="story__list-item">100 руб. - Транспорт</li>
+						<li class="story__list-item">200 руб. - Кафе и рестораны</li>
+						<li class="story__list-item">300 руб. - Аптека</li>
+						<li class="story__list-item">4444400 руб. - Lorem ipsum dolor sit</li>
+					</ol>
+				</div>
+			</section>
+		</div>
 	</main>
 
 	<footer class="footer">

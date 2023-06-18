@@ -1,6 +1,41 @@
 //определение полей ввода поста
-const postTitleNode = document.querySelector('#inputTitle');
-const postDescriptionNode = document.querySelector('#inputDescription');
+const expensesValueNode = document.querySelector('#inputValue');
+const expensesCategoriesNode = document.querySelector('#inputCategories');
+
+
+
+const limitOpenButton = document.querySelector('#limitOpenButton');
+const dialogLimit = document.querySelector('#dialogLimit');
+
+const limitCloseButton = document.querySelector('#limitCloseButton');
+
+limitOpenButton.onclick = () => dialogLimit.showModal();
+limitCloseButton.onclick = () => dialogLimit.close();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //определение кнопок
 const submitButton = document.querySelector('#buttonSubmit');

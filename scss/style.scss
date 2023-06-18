@@ -1,5 +1,5 @@
 
-@import url(https://fonts.googleapis.com/css?family=Tahoma:regular,700);
+@import url(https://fonts.googleapis.com/css?family=Inter:regular,700);
 
 $fontfamily: "Tahoma", sans-serif;
 
@@ -7,9 +7,12 @@ $fontfamily: "Tahoma", sans-serif;
 
 body {
 	width: 100%;
-	background: linear-gradient(90deg, #ec9edb, #d6c3c3);
-	font-family: $fontfamily;
+	background: linear-gradient(90deg, #ec9edb71, #d6c3c396);
+	font-family: Tahoma, sans-serif;
 	font-weight: 400;
+}
+.fixed {
+	overflow: hidden;
 }
 
 
@@ -19,7 +22,7 @@ body {
 	&__title {
 		text-align: center;
 		font-weight: 700;
-		font-size: 40px;
+		font-size: 32px;
 		line-height: 48px;
 		color: rgb(110, 4, 4);
 	}
@@ -41,24 +44,336 @@ body {
 }
 
 .page {
-	//display: flex;
-	//flex-wrap: wrap;
-	//justify-content: center;
-	//align-items: flex-start;
-	//gap: 20px 50px;
 	margin: 0 auto;
-	max-width: 750px;
+	max-width: 780px;
 	padding: 15px;
 }
 
 .title {
 	margin-bottom: 15px;
-	padding-bottom: 10px;
 	font-weight: 700;
-	font-size: 32px;
-	line-height: 40px;
+	font-size: 20px;
+	line-height: 24px;
 }
 
-.story__list-item {
-	list-style-type: decimal;
+.input {
+	margin-bottom: 50px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 40px 50px;
+	
+	@media (max-width: 779px) {
+			margin-bottom: 10px;
+		}
+
+	&__form {
+		position: relative;
+	}
+
+	&__value-wrapper {
+		margin-bottom: 10px;
+		width: 350px;
+		border: 1px solid green;
+		border-radius: 5px;
+
+		&:focus-within {
+			border: 1px solid black;
+		}
+	}
+
+	&__value,
+	&__categories {
+		padding: 5px;
+		background-color: inherit;
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	&__value {
+		width: 310px;
+	}
+
+	&__categories {
+		margin-bottom: 10px;
+		width: 350px;
+		border: 1px solid green;
+		border-radius: 5px;
+
+		&:focus {
+			border: 1px solid black;
+		}
+	}
+
+	&__value-currency {
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	&__categories-datalist {}
+
+	&__explanation {
+		position: absolute;
+		top: 80px;
+		left: 0;
+		max-width: 700px;
+		color: rgb(15, 49, 15);
+
+		& p {
+			padding: 2px;
+			font-size: 12px;
+			font-style: oblique;
+			color: rgb(197, 6, 6);
+		}
+	}
+
+	&__teg {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__button {
+		margin-bottom: 10px;
+		padding: 5px 40px;
+		background-color: rgb(64, 54, 155);
+		border: 1px solid rgb(64, 54, 155);
+		border-radius: 5px;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 20px;
+		letter-spacing: 3px;
+		color: #eee;
+
+		&:focus {
+			border: 1px solid black;
+		}
+	}
+
+	&__error {
+		width: 350px;
+		height: 20px;
+		text-align: center;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 20px;
+		color: rgb(197, 6, 6);
+	}
 }
+
+.output__wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 20px 50px;
+
+	@media (max-width: 779px) {
+		justify-content: center;
+	}
+}
+
+.status {
+	width: 350px;
+
+	&__limit,
+	&__sum {
+		margin-bottom: 10px;
+	}
+
+	&__output {
+		margin-bottom: 30px;
+	}
+
+	&__button {
+		width: 30px;
+		height: 20px;
+		background: url('../resourses/img/change.svg') center/contain no-repeat	;
+	}
+
+	
+
+	&__limit-value,
+	&__sum-value,
+	&__limit-currency,
+	&__sum-currency,
+	&__output-conclusion {
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	&__sum-title {}
+
+	&__limit-title {}
+
+	&__output-title {}
+
+	&__output-conclusion {
+		font-weight: 700;
+		color: darkgreen;
+	}
+
+	&__output-conclusion-warn {
+		color: crimson;
+	}
+}
+
+.limit {
+	position: relative;
+	margin: auto;
+	padding: 10px;
+	background: #ccc;
+	border: 1px solid #7c7a7a;
+	border-radius: 10px;
+	animation: fadeIn 300ms ease-in-out;
+
+	&::backdrop {
+		background-color: rgba(49, 49, 49, 0.8);
+	}
+
+	&__title {
+		margin-bottom: 30px;
+
+	}
+
+	&__form {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		gap: 20px 30px;
+	}
+	
+	&__value-wrapper {
+		width: 250px;
+		background-color: lightcyan;
+		border: 1px solid green;
+		border-radius: 5px;
+
+		&:focus-within {
+			border: 1px solid black;
+		}
+	}
+
+	&__value {
+		padding: 5px;
+		background-color:inherit;
+		border-radius: 5px;
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	&__value-currency {
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	&__add-button {
+		padding: 5px 20px;
+		background-color: rgb(64, 54, 155);
+		border: 1px solid rgb(64, 54, 155);
+		border-radius: 5px;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 20px;
+		color: #eee;
+	
+		&:focus {
+			border: 1px solid black;
+		}
+
+	}
+
+	&__close-button {
+		position: absolute;
+		top: 12px;
+		right: 10px;
+		width: 30px;
+		height: 20px;
+		background: url('../resourses/img/icon/close.svg') center/contain no-repeat;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+.story {
+	width: 350px;
+
+	&__button-clear {
+		margin-bottom: 10px;
+		padding: 5px 20px;
+		background-color: rgb(189, 38, 38);
+		border: 1px solid rgb(189, 38, 38);
+		border-radius: 5px;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 20px;
+		color: #eee;
+	
+		&:focus {
+			border: 1px solid black;
+		}
+	}
+
+	&__title {}
+
+	&__output {
+		max-height: 350px;
+		overflow-y: auto;
+
+		//!настройка скролл-барра
+		//скроллбары в Chrome/Edge/Safari
+		&::-webkit-scrollbar {
+			width: 10px;
+			/* ширина scrollbar */
+		}
+	
+		&::-webkit-scrollbar-track {
+			background: #dd9ae6;
+			/* цвет дорожки */
+			border-radius: 50px;
+			/* закругления дрожки */
+		}
+	
+		&::-webkit-scrollbar-thumb {
+			background-color: #7c7a7a;
+			/* цвет плашки */
+			border-radius: 50px;
+			/* закругления плашки */
+			border: 2px solid #dd9ae6;
+			/* padding вокруг плашки */
+		}
+	
+		//скроллбары в Fifefox	
+		scrollbar-width: thin;
+		/* "auto" или "thin"  */
+		scrollbar-color: #7c7a7a #dd9ae6;
+		/* плашка скролла и дорожка */
+	}
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__list-item {
+		margin-bottom: 5px;
+		list-style-type: decimal;
+		list-style-position: inside;
+		font-size: 14px;
+		line-height: 18px;
+	}
+}
+
