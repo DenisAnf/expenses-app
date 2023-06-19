@@ -85,7 +85,7 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------*/
 body {
   width: 100%;
-  background: linear-gradient(90deg, rgba(236, 158, 219, 0.4431372549), rgba(214, 195, 195, 0.5882352941));
+  background: linear-gradient(90deg, rgba(241, 211, 235, 0.4431372549), rgba(228, 222, 222, 0.5882352941));
   font-family: Tahoma, sans-serif;
   font-weight: 400;
 }
@@ -261,7 +261,7 @@ body {
 .limit {
   position: relative;
   margin: auto;
-  padding: 10px;
+  padding: 20px;
   background: #ccc;
   border: 1px solid #7c7a7a;
   border-radius: 10px;
@@ -315,8 +315,8 @@ body {
 }
 .limit__close-button {
   position: absolute;
-  top: 12px;
-  right: 10px;
+  top: 22px;
+  right: 20px;
   width: 30px;
   height: 20px;
   background: url("../resourses/img/icon/close.svg") center/contain no-repeat;

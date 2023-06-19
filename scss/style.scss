@@ -7,7 +7,7 @@ $fontfamily: "Tahoma", sans-serif;
 
 body {
 	width: 100%;
-	background: linear-gradient(90deg, #ec9edb71, #d6c3c396);
+	background: linear-gradient(90deg, #f1d3eb71, #e4dede96);
 	font-family: Tahoma, sans-serif;
 	font-weight: 400;
 }
@@ -223,7 +223,7 @@ body {
 .limit {
 	position: relative;
 	margin: auto;
-	padding: 10px;
+	padding: 20px;
 	background: #ccc;
 	border: 1px solid #7c7a7a;
 	border-radius: 10px;
@@ -288,8 +288,8 @@ body {
 
 	&__close-button {
 		position: absolute;
-		top: 12px;
-		right: 10px;
+		top: 22px;
+		right: 20px;
 		width: 30px;
 		height: 20px;
 		background: url('../resourses/img/icon/close.svg') center/contain no-repeat;

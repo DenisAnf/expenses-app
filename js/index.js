@@ -1,16 +1,119 @@
-//определение полей ввода поста
+//определение поля ввода расходов
 const expensesValueNode = document.querySelector('#inputValue');
+
+//определение поля ввода категории
 const expensesCategoriesNode = document.querySelector('#inputCategories');
 
+//определение кнопки добавить расходы
+const inputAddButton = document.querySelector('#inputButton');
 
+//определение поля вывода ошибки о незаполненных полях
+const outputError = document.querySelector('#inputError');
 
+//определение поля вывода лимита
+const limitValueNode = document.querySelector('#limitValue');
+
+//определение поля вывода суммы
+const sumValueNode = document.querySelector('#sumValue');
+
+//определение поля вывода статуса
+const statusValueNode = document.querySelector('#statusOutput');
+
+//определение кнопок открытия и закрытия модального окна
 const limitOpenButton = document.querySelector('#limitOpenButton');
-const dialogLimit = document.querySelector('#dialogLimit');
-
 const limitCloseButton = document.querySelector('#limitCloseButton');
 
-limitOpenButton.onclick = () => dialogLimit.showModal();
-limitCloseButton.onclick = () => dialogLimit.close();
+//определение тела модального окна
+const dialogLimitWindow = document.querySelector('#dialogLimit');
+
+//определение поля получения нового лимита
+const limitNewValueNode = document.querySelector('#limitValue');
+
+//определение кнопки задания нового лимита
+const limitAddButton = document.querySelector('#limitAddButton');
+
+//определение кнопки сброса массива
+const storyClearButton = document.querySelector('#storyButtonClear');
+
+//определение поля вывода массива расходов
+const storyOutputNode = document.querySelector('#storyOutput');
+
+
+//задание лимита по умолчанию и вывод в поле лимита
+const LIMIT_INIITIAL_VALUE = 10000;
+let limitValue = LIMIT_INIITIAL_VALUE;
+limitValueNode.innerText = limitValue;
+
+//задание пустого массива расходов
+let expenses = [];
+
+
+//! ФУНКЦИИ ------------------------------------------------
+
+//функция-конструктор объекта расходов
+function Expense (rate, category) {
+	this.rate = rate;
+	this.category = category;
+};
+
+//функция получения значения расхода и категории из полей
+let getExpenseFromUser = () => {
+	const expenseRate = expensesValueNode.value;
+	const expenseCategory = expensesCategoriesNode.value;
+
+	const expense = new Expense(expenseRate, expenseCategory);
+	
+	return expense;
+};
+
+//функция добавления текущих значений в массив расходов
+let addExpense = (exp) => expenses.push(exp);
+
+//функция получения массива рассходов
+let getExpensesList = () => expenses;
+
+//функция вывода записей расходов из массива
+let renderExpensesList = () => {
+	const expenseContainer = document.createElement('ol');
+	expenseContainer.className = 'story__list';
+
+	const showExpensesList = getExpensesList();
+
+	showExpensesList.forEach(element => {
+		const expenseElement = document.createElement('li');
+
+		expenseElement.className = 'story__list-item';
+		expenseElement.textContent = `${element.rate} руб. - ${element.category}`;
+		
+		expenseContainer.appendChild(expenseElement);
+	});
+	
+	storyOutputNode.innerHTML = '';
+	storyOutputNode.appendChild(expenseContainer);
+};
+
+
+//итоговая функция добавления расходов по клику "Добавить"
+let getExpenses = () => {
+	const expense = getExpenseFromUser();
+
+	addExpense(expense);
+	renderExpensesList();
+};
+
+
+
+
+
+//! ОБРАБОТЧИКИ --------------------------------------------
+
+//добавление расходов
+inputAddButton.addEventListener('click', getExpenses);
+
+
+//открытие и закрытие модального окна
+limitOpenButton.onclick = () => dialogLimitWindow.showModal();
+limitCloseButton.onclick = () => dialogLimitWindow.close();
 
 
 
@@ -20,8 +123,19 @@ limitCloseButton.onclick = () => dialogLimit.close();
 
 
 
+//? Старые версии написания кода
 
+/*for (let i = 0; i < showExpensesList.length; i++) {
+	showExpensesHTML += `
+	<li class="story__list-item">${showExpensesList[i].rate} руб. - ${showExpensesList[i].category}</li>
+	`;
+}; */
 
+/*showExpensesList.forEach(element => {
+	showExpensesHTML += `
+	<li class="story__list-item">${element.rate} руб. - ${element.category}</li>
+	`;
+}); */
 
 
 
