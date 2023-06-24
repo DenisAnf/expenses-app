@@ -330,8 +330,8 @@ body {
 	&__title {}
 
 	&__output {
-		max-height: 350px;
-		overflow-y: auto;
+		height: 300px;
+		overflow-y: auto; 	
 
 		//!настройка скролл-барра
 		//скроллбары в Chrome/Edge/Safari

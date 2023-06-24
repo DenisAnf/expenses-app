@@ -350,7 +350,7 @@ body {
   border: 1px solid black;
 }
 .story__output {
-  max-height: 350px;
+  height: 300px;
   overflow-y: auto;
   scrollbar-width: thin;
   /* "auto" или "thin"  */

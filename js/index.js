@@ -38,14 +38,21 @@ const storyClearButton = document.querySelector('#storyButtonClear');
 //определение поля вывода массива расходов
 const storyOutputNode = document.querySelector('#storyOutput');
 
-
 //задание лимита по умолчанию и вывод в поле лимита
 const LIMIT_INIITIAL_VALUE = 10000;
 let limitValue = LIMIT_INIITIAL_VALUE;
-limitValueNode.innerText = limitValue;
+limitValueNode.innerText = limitValue;//! убрать при изменении
+
+//задание суммы расходов по умолчанию
+const SUM_INIITIAL_VALUE = 0;
+
+//задание текста для пустого списка расходов
+const TEXT_NULL_STORY = 'Пока расходов нет? Уверен?';
+storyOutputNode.textContent = TEXT_NULL_STORY;
 
 //задание пустого массива расходов
 let expenses = [];
+
 
 
 //! ФУНКЦИИ ------------------------------------------------
@@ -67,19 +74,43 @@ let getExpenseFromUser = () => {
 };
 
 //функция добавления текущих значений в массив расходов
-let addExpense = (exp) => expenses.push(exp);
+let addExpense = (obj) => expenses.push(obj);
 
 //функция получения массива рассходов
 let getExpensesList = () => expenses;
+
+//функция вывода суммарного значения и статуса (сразу вызывается для отображения значений по умолчанию)
+let showStatusExpenses = () => {
+	const expensesList = getExpensesList();
+	
+	let sum = SUM_INIITIAL_VALUE;
+
+	expensesList.forEach(element => {
+		sum += parseFloat(element.rate);
+		return sum;
+	});
+
+	sumValueNode.textContent = sum;
+	
+	if (sum > limitValue) {
+		statusValueNode.innerText = `все плохо (перерасход ${sum - limitValue} руб.)`;
+		statusValueNode.classList.add('status__output-conclusion-warn');
+		return;
+	};
+
+	statusValueNode.innerText = 'все хорошо';
+	statusValueNode.classList.remove('status__output-conclusion-warn');
+};
+showStatusExpenses();
 
 //функция вывода записей расходов из массива
 let renderExpensesList = () => {
 	const expenseContainer = document.createElement('ol');
 	expenseContainer.className = 'story__list';
 
-	const showExpensesList = getExpensesList();
+	const expensesList = getExpensesList();
 
-	showExpensesList.forEach(element => {
+	expensesList.forEach(element => {
 		const expenseElement = document.createElement('li');
 
 		expenseElement.className = 'story__list-item';
@@ -92,6 +123,11 @@ let renderExpensesList = () => {
 	storyOutputNode.appendChild(expenseContainer);
 };
 
+//функция очистки поля ввода расходов и категории
+let clearExpensesNode = () => {
+	expensesValueNode.value = null;
+	expensesCategoriesNode.value = null;
+};
 
 //итоговая функция добавления расходов по клику "Добавить"
 let getExpenses = () => {
@@ -99,8 +135,17 @@ let getExpenses = () => {
 
 	addExpense(expense);
 	renderExpensesList();
+	clearExpensesNode();
+	showStatusExpenses();
 };
 
+//функция сброса списка расходов
+let clearExpensesList = () => {
+	expenses = [];
+	renderExpensesList();
+	showStatusExpenses();
+	storyOutputNode.textContent = TEXT_NULL_STORY;
+}
 
 
 
@@ -110,10 +155,12 @@ let getExpenses = () => {
 //добавление расходов
 inputAddButton.addEventListener('click', getExpenses);
 
-
 //открытие и закрытие модального окна
 limitOpenButton.onclick = () => dialogLimitWindow.showModal();
 limitCloseButton.onclick = () => dialogLimitWindow.close();
+
+//сброс списка расхдов
+storyClearButton.onclick = () => clearExpensesList();
 
 
 
@@ -151,7 +198,7 @@ limitCloseButton.onclick = () => dialogLimitWindow.close();
 
 
 
-//определение кнопок
+/*//определение кнопок
 const submitButton = document.querySelector('#buttonSubmit');
 const resetButton = document.querySelector('#buttonReset');
 
@@ -384,7 +431,7 @@ function transitionFocusByEnter(event) {
 
 		getPost();
   }
-};*/
+};
 
 
 
@@ -406,4 +453,4 @@ postDescriptionNode.addEventListener('input', validation);
 
 //Переход по Enter с заголовка на поле теста поста
 postTitleNode.addEventListener("keydown", transitionFocusByEnter);
-////postDescriptionNode.addEventListener("keydown", renderByEnter);
+////postDescriptionNode.addEventListener("keydown", renderByEnter);*/
