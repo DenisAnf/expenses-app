@@ -150,6 +150,10 @@ body {
 		&:focus {
 			border: 1px solid black;
 		}
+
+		&:hover {
+			background-color: rgb(31, 13, 190);
+		}
 	}
 
 	&__error {
@@ -191,6 +195,10 @@ body {
 		width: 30px;
 		height: 20px;
 		background: url('../resourses/img/change.svg') center/contain no-repeat	;
+
+		&:hover {
+			background-color: wheat;
+		}
 	}
 
 	
@@ -283,6 +291,10 @@ body {
 		&:focus {
 			border: 1px solid black;
 		}
+
+		&:hover {
+			background-color: rgb(31, 13, 190);
+		}
 	}
 
 	&__close-button {
@@ -292,6 +304,10 @@ body {
 		width: 30px;
 		height: 20px;
 		background: url('../resourses/img/icon/close.svg') center/contain no-repeat;
+
+		&:hover {
+			height: 22px;
+		}
 	}
 
 	&__value-error {
@@ -334,6 +350,10 @@ body {
 	
 		&:focus {
 			border: 1px solid black;
+		}
+
+		&:hover {
+			background-color: rgb(216, 13, 13);
 		}
 	}
 

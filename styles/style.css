@@ -209,6 +209,9 @@ body {
 .input__button:focus {
   border: 1px solid black;
 }
+.input__button:hover {
+  background-color: rgb(31, 13, 190);
+}
 .input__error {
   width: 350px;
   height: 20px;
@@ -245,6 +248,9 @@ body {
   width: 30px;
   height: 20px;
   background: url("../resourses/img/change.svg") center/contain no-repeat;
+}
+.status__button:hover {
+  background-color: wheat;
 }
 .status__limit-value, .status__sum-value, .status__limit-currency, .status__sum-currency, .status__output-conclusion {
   font-size: 16px;
@@ -313,6 +319,9 @@ body {
 .limit__add-button:focus {
   border: 1px solid black;
 }
+.limit__add-button:hover {
+  background-color: rgb(31, 13, 190);
+}
 .limit__close-button {
   position: absolute;
   top: 22px;
@@ -320,6 +329,9 @@ body {
   width: 30px;
   height: 20px;
   background: url("../resourses/img/icon/close.svg") center/contain no-repeat;
+}
+.limit__close-button:hover {
+  height: 22px;
 }
 .limit__value-error {
   margin-top: 10px;
@@ -358,6 +370,9 @@ body {
 }
 .story__button-clear:focus {
   border: 1px solid black;
+}
+.story__button-clear:hover {
+  background-color: rgb(216, 13, 13);
 }
 .story__output {
   height: 300px;
