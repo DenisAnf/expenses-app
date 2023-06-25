@@ -8,7 +8,7 @@ const expensesCategoriesNode = document.querySelector('#inputCategories');
 const inputAddButton = document.querySelector('#inputButton');
 
 //определение поля вывода ошибки о незаполненных полях расходов
-const outputError = document.querySelector('#inputError');
+const inputError = document.querySelector('#inputError');
 
 //определение поля вывода лимита
 const limitValueNode = document.querySelector('#limitValue');
@@ -57,11 +57,11 @@ let expenses = [];
 //задание регулярного выражения для числа с 2 знаками после запятой
 const regex = /^\d+(?:[\.,]\d{1,2})?$/;
 
-
+//задание регулярного выражения  для проверки на использование только пробелов в поле категории
+const reg = /\s/g;
 
 
 //! ФУНКЦИИ ------------------------------------------------
-
 
 //функция-конструктор объекта расходов
 function Expense (rate, category) {
@@ -96,7 +96,7 @@ let showStatusExpenses = () => {
 		return sum;
 	});
 
-	sumValueNode.textContent = sum;
+	sumValueNode.textContent = sum.toFixed(2);
 	
 	if (sum > limitValue) {
 		const overbalance = sum - limitValue
@@ -136,8 +136,47 @@ let clearExpensesNode = () => {
 	expensesCategoriesNode.value = null;
 };
 
+//функция проверки полей ввода
+let validationInputFromUser = () => {
+	const valueInput = expensesValueNode.value;
+	const numberValueInput = parseFloat(valueInput);
+
+	const categoriesInput = expensesCategoriesNode.value;
+	const categoriesInputLength = categoriesInput.length;
+	const categoriesInputWithoutSpace = expensesCategoriesNode.value.replace(reg, '');
+	const categoriesInputLengthWithoutSpace = categoriesInputWithoutSpace.length;
+
+	if (!valueInput || numberValueInput == 0) {
+		inputError.innerText = 'Не верно задан расход';
+		return true;
+	};	
+
+	if (!regex.test(valueInput)) {
+		inputError.innerText = 'Допускается до 2 знаков после запятой';
+		return true;
+	};	
+
+	if (!categoriesInput || categoriesInputLengthWithoutSpace == 0) {
+		inputError.innerText = 'Не задана категория';
+		return true;
+	};	
+
+	if (categoriesInputLength > 20) {
+		inputError.innerText = 'Допускается до 20 знаков в категории';
+		return true;
+	};	
+	
+	inputError.innerText = '';
+	return false;
+};
+
 //итоговая функция добавления расходов по клику "Добавить"
 let getExpenses = () => {
+
+	if (validationInputFromUser()) {
+		return;
+	};
+	
 	const expense = getExpenseFromUser();
 
 	addExpense(expense);
@@ -179,6 +218,22 @@ let changeLimitValue = () => {
 	dialogLimitWindow.close();
 };
 
+//функция смены фокуса с рахода на категорию по Enter
+let changeFocusByEnter = (event) => {
+	if (event.keyCode === 13) {
+		event.preventDefault();
+		expensesCategoriesNode.focus();
+	};
+};
+
+//функция добавления расходов по Enter в поле категории
+let submitExpense = (event) => {
+	if (event.keyCode === 13) {
+		event.preventDefault();
+		getExpenses();
+	};
+};
+
 //функция изменения лимита по Enter
 let changeLimitValueByEnter = (event) => {
 	if (event.keyCode === 13) {
@@ -217,7 +272,11 @@ limitAddButton.addEventListener('click', changeLimitValue);
 //задание нового лимита	по Enter
 limitNewValueNode.addEventListener('keydown', changeLimitValueByEnter);
 
+//смена фокуса с поля расходов на поле категори по Enter
+expensesValueNode.addEventListener('keydown', changeFocusByEnter);
 
+//добавление расходов по Enter в поле категории
+expensesCategoriesNode.addEventListener('keydown', submitExpense);
 
 
 
