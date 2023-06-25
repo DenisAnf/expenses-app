@@ -192,16 +192,14 @@ body {
 	}
 
 	&__button {
-		width: 30px;
-		height: 20px;
-		background: url('../resourses/img/change.svg') center/contain no-repeat	;
+		width: 22px;
+		height: 22px;
+		background: url('../resourses/img/change.svg') center/contain no-repeat;
 
 		&:hover {
-			background-color: wheat;
+			background-color: rgba(247, 120, 120, 0.2);
 		}
 	}
-
-	
 
 	&__limit-value,
 	&__sum-value,

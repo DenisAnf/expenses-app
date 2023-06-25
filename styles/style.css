@@ -245,12 +245,12 @@ body {
   margin-bottom: 30px;
 }
 .status__button {
-  width: 30px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   background: url("../resourses/img/change.svg") center/contain no-repeat;
 }
 .status__button:hover {
-  background-color: wheat;
+  background-color: rgba(247, 120, 120, 0.2);
 }
 .status__limit-value, .status__sum-value, .status__limit-currency, .status__sum-currency, .status__output-conclusion {
   font-size: 16px;
