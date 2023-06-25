@@ -7,7 +7,7 @@ const expensesCategoriesNode = document.querySelector('#inputCategories');
 //определение кнопки добавить расходы
 const inputAddButton = document.querySelector('#inputButton');
 
-//определение поля вывода ошибки о незаполненных полях
+//определение поля вывода ошибки о незаполненных полях расходов
 const outputError = document.querySelector('#inputError');
 
 //определение поля вывода лимита
@@ -27,10 +27,13 @@ const limitCloseButton = document.querySelector('#limitCloseButton');
 const dialogLimitWindow = document.querySelector('#dialogLimit');
 
 //определение поля получения нового лимита
-const limitNewValueNode = document.querySelector('#limitValue');
+const limitNewValueNode = document.querySelector('#limitNewValue');
 
 //определение кнопки задания нового лимита
 const limitAddButton = document.querySelector('#limitAddButton');
+
+//определение поля вывода ошибки о неправильно заполненном поле ввода новлого лимита
+const limitError = document.querySelector('#limitNewError');
 
 //определение кнопки сброса массива
 const storyClearButton = document.querySelector('#storyButtonClear');
@@ -38,24 +41,27 @@ const storyClearButton = document.querySelector('#storyButtonClear');
 //определение поля вывода массива расходов
 const storyOutputNode = document.querySelector('#storyOutput');
 
-//задание лимита по умолчанию и вывод в поле лимита
+//задание лимита по умолчанию и объявление переменной лимита
 const LIMIT_INIITIAL_VALUE = 10000;
-let limitValue = LIMIT_INIITIAL_VALUE;
-limitValueNode.innerText = limitValue;//! убрать при изменении
+let limitValue;
 
 //задание суммы расходов по умолчанию
 const SUM_INIITIAL_VALUE = 0;
 
 //задание текста для пустого списка расходов
 const TEXT_NULL_STORY = 'Пока расходов нет? Уверен?';
-storyOutputNode.textContent = TEXT_NULL_STORY;
 
 //задание пустого массива расходов
 let expenses = [];
 
+//задание регулярного выражения для числа с 2 знаками после запятой
+const regex = /^\d+(?:[\.,]\d{1,2})?$/;
+
+
 
 
 //! ФУНКЦИИ ------------------------------------------------
+
 
 //функция-конструктор объекта расходов
 function Expense (rate, category) {
@@ -79,7 +85,7 @@ let addExpense = (obj) => expenses.push(obj);
 //функция получения массива рассходов
 let getExpensesList = () => expenses;
 
-//функция вывода суммарного значения и статуса (сразу вызывается для отображения значений по умолчанию)
+//функция вывода суммарного значения и статуса (сразу вызывается в init)
 let showStatusExpenses = () => {
 	const expensesList = getExpensesList();
 	
@@ -93,7 +99,8 @@ let showStatusExpenses = () => {
 	sumValueNode.textContent = sum;
 	
 	if (sum > limitValue) {
-		statusValueNode.innerText = `все плохо (перерасход ${sum - limitValue} руб.)`;
+		const overbalance = sum - limitValue
+		statusValueNode.innerText = `все плохо \n(перерасход ${overbalance.toFixed(2)} руб.)`;
 		statusValueNode.classList.add('status__output-conclusion-warn');
 		return;
 	};
@@ -101,15 +108,16 @@ let showStatusExpenses = () => {
 	statusValueNode.innerText = 'все хорошо';
 	statusValueNode.classList.remove('status__output-conclusion-warn');
 };
-showStatusExpenses();
 
 //функция вывода записей расходов из массива
 let renderExpensesList = () => {
-	const expenseContainer = document.createElement('ol');
-	expenseContainer.className = 'story__list';
-
 	const expensesList = getExpensesList();
 
+	storyOutputNode.innerHTML = '';
+
+	const expenseContainer = document.createElement('ol');
+	expenseContainer.className = 'story__list';
+	
 	expensesList.forEach(element => {
 		const expenseElement = document.createElement('li');
 
@@ -119,7 +127,6 @@ let renderExpensesList = () => {
 		expenseContainer.appendChild(expenseElement);
 	});
 	
-	storyOutputNode.innerHTML = '';
 	storyOutputNode.appendChild(expenseContainer);
 };
 
@@ -147,6 +154,48 @@ let clearExpensesList = () => {
 	storyOutputNode.textContent = TEXT_NULL_STORY;
 }
 
+//функция изменения лимита
+let changeLimitValue = () => {
+	const newLimit = limitNewValueNode.value;
+
+	limitValue = parseFloat(newLimit); //можно .toFixed(2) вместо проверки на регулярное выражение
+	
+	if (!newLimit || limitValue == 0) {
+		limitError.innerText = 'Введите значение лимита';
+		return
+	};	
+
+	if (!regex.test(limitValue)) {
+		limitError.innerText = 'Допускается максимум 2 знака после запятой';
+		return
+	};	
+
+	limitError.innerText = '';
+
+	limitValueNode.innerText = limitValue;
+	showStatusExpenses();
+
+	limitNewValueNode.value = '';
+	dialogLimitWindow.close();
+};
+
+//функция изменения лимита по Enter
+let changeLimitValueByEnter = (event) => {
+	if (event.keyCode === 13) {
+		event.preventDefault();
+		changeLimitValue();
+	};
+};
+
+//функция при инициализации для значений по умолчанию (сразу вызывается)
+let init = () => {
+	expensesValueNode.focus();
+	storyOutputNode.textContent = TEXT_NULL_STORY;
+	limitValue = LIMIT_INIITIAL_VALUE;
+	limitValueNode.innerText = limitValue;
+	showStatusExpenses();
+};
+init();
 
 
 
@@ -159,11 +208,14 @@ inputAddButton.addEventListener('click', getExpenses);
 limitOpenButton.onclick = () => dialogLimitWindow.showModal();
 limitCloseButton.onclick = () => dialogLimitWindow.close();
 
-//сброс списка расхдов
-storyClearButton.onclick = () => clearExpensesList();
+//сброс списка расходов
+storyClearButton.addEventListener('click', clearExpensesList);
 
+//задание нового лимита
+limitAddButton.addEventListener('click', changeLimitValue);
 
-
+//задание нового лимита	по Enter
+limitNewValueNode.addEventListener('keydown', changeLimitValueByEnter);
 
 
 
@@ -172,20 +224,31 @@ storyClearButton.onclick = () => clearExpensesList();
 
 //? Старые версии написания кода
 
-/*for (let i = 0; i < showExpensesList.length; i++) {
-	showExpensesHTML += `
-	<li class="story__list-item">${showExpensesList[i].rate} руб. - ${showExpensesList[i].category}</li>
-	`;
-}; */
-
 /*showExpensesList.forEach(element => {
 	showExpensesHTML += `
 	<li class="story__list-item">${element.rate} руб. - ${element.category}</li>
 	`;
-}); */
+}); 
 
 
+//функция ограницения до копеек в полях ввода расходов и лимита
+let formatInputLimitNode = () => {
+	const newLimit = limitNewValueNode.value;
 
+	// Разделяем значение на целую и десятичную части
+	let parts = newLimit.split('.');
+	let integerPart = parts[0];
+	let decimalPart = parts[1];
+	
+	// Ограничиваем десятичную часть до двух знаков
+	if (decimalPart && decimalPart.length > 2) {
+		decimalPart = decimalPart.slice(0, 2);
+	};
+
+	// Обновляем значение поля ввода
+	limitNewValueNode.innerText = integerPart + (decimalPart ? '.' + decimalPart : '');
+
+};*/
 
 
 

@@ -265,7 +265,7 @@ body {
   background: #ccc;
   border: 1px solid #7c7a7a;
   border-radius: 10px;
-  animation: fadeIn 300ms ease-in-out;
+  animation: fadeIn 350ms ease-in-out;
 }
 .limit::backdrop {
   background-color: rgba(49, 49, 49, 0.8);
@@ -320,6 +320,16 @@ body {
   width: 30px;
   height: 20px;
   background: url("../resourses/img/icon/close.svg") center/contain no-repeat;
+}
+.limit__value-error {
+  margin-top: 10px;
+  height: 24px;
+  padding: 4px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: rgb(197, 6, 6);
 }
 
 @keyframes fadeIn {

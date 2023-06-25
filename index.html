@@ -44,9 +44,9 @@
 			<form action="" class="input__form">
 				<div class="input__value-wrapper">
 					<input id="inputValue" type="number" min="1" class="input__value" placeholder="Введите сумму" tabindex="1">
-					<span class="input__value-currency">
+					<label for="inputValue" class="input__value-currency">
 						руб.
-					</span>
+					</label>
 				</div>
 				<input id="inputCategories" type="text" list="categories" class="input__categories" placeholder="Выберите категорию" tabindex="2">
 				<datalist id="categories" class="input__categories-datalist">
@@ -107,11 +107,12 @@
 					<h2 class="limit__title title">Новый лимит</h2>
 					<form action="" class="limit__form">
 						<div class="limit__value-wrapper">
-							<input id="limitValue" type="number" min="1" class="limit__value" placeholder="Введите новый лимит">
-							<span class="limit__value-currency">руб.</span>
+							<input id="limitNewValue" type="number" min="0.01" step="0.01" class="limit__value" placeholder="Введите новый лимит" pattern="^\d+(?:[\.,]\d{1,2})?$">
+							<label for="limitNewValue" class="limit__value-currency">руб.</label>
 						</div>
 						<button id="limitAddButton" type="button" class="limit__add-button" tabindex="4">Задать лимит</button>
 					</form>
+					<p id="limitNewError" class="limit__value-error"></p>
 					<button id="limitCloseButton" type="button" class="limit__close-button"></button>
 				</dialog>
 				<button id="storyButtonClear" type="button" class="story__button-clear" tabindex="5">
