@@ -161,12 +161,12 @@ let changeLimitValue = () => {
 	limitValue = parseFloat(newLimit); //можно .toFixed(2) вместо проверки на регулярное выражение
 	
 	if (!newLimit || limitValue == 0) {
-		limitError.innerText = 'Введите значение лимита';
+		limitError.innerText = 'Не верно задан лимит';
 		return
 	};	
 
 	if (!regex.test(limitValue)) {
-		limitError.innerText = 'Допускается максимум 2 знака после запятой';
+		limitError.innerText = 'Допускается до 2 знаков после запятой';
 		return
 	};	
 
