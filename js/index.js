@@ -147,7 +147,7 @@ let validationInputFromUser = () => {
 	const categoriesInputLengthWithoutSpace = categoriesInputWithoutSpace.length;
 
 	if (!valueInput || numberValueInput == 0) {
-		inputError.innerText = 'Не верно задан расход';
+		inputError.innerText = 'Укажите расход';
 		return true;
 	};	
 
@@ -157,7 +157,7 @@ let validationInputFromUser = () => {
 	};	
 
 	if (!categoriesInput || categoriesInputLengthWithoutSpace == 0) {
-		inputError.innerText = 'Не задана категория';
+		inputError.innerText = 'Укажите категорию';
 		return true;
 	};	
 
@@ -200,7 +200,7 @@ let changeLimitValue = () => {
 	limitValue = parseFloat(newLimit); //можно .toFixed(2) вместо проверки на регулярное выражение
 	
 	if (!newLimit || limitValue == 0) {
-		limitError.innerText = 'Не верно задан лимит';
+		limitError.innerText = 'Укажите лимит';
 		return
 	};	
 
@@ -248,7 +248,7 @@ let init = () => {
 	expensesValueNode.focus();
 	storyOutputNode.textContent = TEXT_NULL_STORY;
 	limitValue = LIMIT_INIITIAL_VALUE;
-	limitValueNode.innerText = limitValue;
+	limitValueNode.innerText = limitValue.toFixed(2);
 	showStatusExpenses();
 };
 init();

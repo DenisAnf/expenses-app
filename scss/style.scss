@@ -1,6 +1,4 @@
 
-@import url(https://fonts.googleapis.com/css?family=Inter:regular,700);
-
 $fontfamily: "Tahoma", sans-serif;
 
 @import "_nullstyle";
@@ -10,11 +8,12 @@ body {
 	background: linear-gradient(90deg, #f1d3eb71, #e4dede96);
 	font-family: Tahoma, sans-serif;
 	font-weight: 400;
+	overflow-wrap: break-word;
 }
+
 .fixed {
 	overflow: hidden;
 }
-
 
 .header {
 	padding: 15px 0 10px;
@@ -132,7 +131,7 @@ body {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
+		align-items: flex-start;
 	}
 
 	&__button {
@@ -159,7 +158,7 @@ body {
 	&__error {
 		width: 350px;
 		height: 20px;
-		text-align: center;
+		text-align: left;
 		font-weight: 700;
 		font-size: 16px;
 		line-height: 20px;

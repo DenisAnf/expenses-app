@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url(https://fonts.googleapis.com/css?family=Inter:regular,700); /*Обнуление*/
+/*Обнуление*/
 * {
   padding: 0;
   margin: 0;
@@ -88,6 +88,7 @@ body {
   background: linear-gradient(90deg, rgba(241, 211, 235, 0.4431372549), rgba(228, 222, 222, 0.5882352941));
   font-family: Tahoma, sans-serif;
   font-weight: 400;
+  overflow-wrap: break-word;
 }
 
 .fixed {
@@ -192,7 +193,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 .input__button {
   margin-bottom: 10px;
@@ -215,7 +216,7 @@ body {
 .input__error {
   width: 350px;
   height: 20px;
-  text-align: center;
+  text-align: left;
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
