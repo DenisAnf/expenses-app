@@ -197,7 +197,7 @@ let clearExpensesList = () => {
 let changeLimitValue = () => {
 	const newLimit = limitNewValueNode.value;
 
-	limitValue = parseFloat(newLimit); //можно .toFixed(2) вместо проверки на регулярное выражение
+	limitValue = parseFloat(newLimit).toFixed(2); //.toFixed(2) для отображения двух знаков после запятой
 	
 	if (!newLimit || limitValue == 0) {
 		limitError.innerText = 'Укажите лимит';
