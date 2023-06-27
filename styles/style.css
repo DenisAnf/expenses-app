@@ -289,7 +289,7 @@ body {
   gap: 20px 30px;
 }
 .limit__value-wrapper {
-  width: 253px;
+  width: 250px;
   background-color: lightcyan;
   border: 1px solid green;
   border-radius: 5px;
@@ -298,6 +298,7 @@ body {
   border: 1px solid black;
 }
 .limit__value {
+  max-width: 200px;
   padding: 5px;
   background-color: inherit;
   border-radius: 5px;
