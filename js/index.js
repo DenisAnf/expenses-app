@@ -151,6 +151,11 @@ let validationInputFromUser = () => {
 		return true;
 	};	
 
+	if (numberValueInput < 0) {
+		inputError.innerText = 'Значение должно быть больше 0';
+		return true;
+	};	
+
 	if (!regex.test(valueInput)) {
 		inputError.innerText = 'Допускается до 2 знаков после запятой';
 		return true;
@@ -201,6 +206,11 @@ let changeLimitValue = () => {
 	
 	if (!newLimit || limitValue == 0) {
 		limitError.innerText = 'Укажите лимит';
+		return
+	};
+
+	if (limitValue < 0) {
+		limitError.innerText = 'Значение должно быть больше 0';
 		return
 	};	
 
