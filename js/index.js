@@ -70,7 +70,7 @@ function Expense (rate, category) {
 };
 
 //функция получения значения расхода и категории из полей
-let getExpenseFromUser = () => {
+const getExpenseFromUser = () => {
 	const expenseRate = expensesValueNode.value;
 	const expenseCategory = expensesCategoriesNode.value;
 
@@ -80,18 +80,18 @@ let getExpenseFromUser = () => {
 };
 
 //функция добавления текущих значений в массив расходов
-let addExpense = (obj) => expenses.push(obj);
+const addExpense = (bill) => expenses.push(bill);
 
 //функция получения массива рассходов
-let getExpensesList = () => expenses;
+const getExpenses = () => expenses;
 
 //функция вывода суммарного значения и статуса (сразу вызывается в init)
-let showStatusExpenses = () => {
-	const expensesList = getExpensesList();
+const showStatusExpenses = () => {
+	const expensesBill = getExpenses();
 	
 	let sum = SUM_INIITIAL_VALUE;
 
-	expensesList.forEach(element => {
+	expensesBill.forEach(element => {
 		sum += parseFloat(element.rate);
 		return sum;
 	});
@@ -110,15 +110,15 @@ let showStatusExpenses = () => {
 };
 
 //функция вывода записей расходов из массива
-let renderExpensesList = () => {
-	const expensesList = getExpensesList();
+const renderExpenses = () => {
+	const expensesBill = getExpenses();
 
 	storyOutputNode.innerHTML = '';
 
 	const expenseContainer = document.createElement('ol');
 	expenseContainer.className = 'story__list';
 	
-	expensesList.forEach(element => {
+	expensesBill.forEach(element => {
 		const expenseElement = document.createElement('li');
 
 		expenseElement.className = 'story__list-item';
@@ -131,13 +131,13 @@ let renderExpensesList = () => {
 };
 
 //функция очистки поля ввода расходов и категории
-let clearExpensesNode = () => {
+const clearExpensesNode = () => {
 	expensesValueNode.value = null;
 	expensesCategoriesNode.value = null;
 };
 
 //функция проверки полей ввода
-let validationInputFromUser = () => {
+const validationInputFromUser = () => {
 	const valueInput = expensesValueNode.value;
 	const numberValueInput = parseFloat(valueInput);
 
@@ -176,7 +176,7 @@ let validationInputFromUser = () => {
 };
 
 //итоговая функция добавления расходов по клику "Добавить"
-let getExpenses = () => {
+const getExpense = () => {
 
 	if (validationInputFromUser()) {
 		return;
@@ -185,21 +185,21 @@ let getExpenses = () => {
 	const expense = getExpenseFromUser();
 
 	addExpense(expense);
-	renderExpensesList();
+	renderExpenses();
 	clearExpensesNode();
 	showStatusExpenses();
 };
 
 //функция сброса списка расходов
-let clearExpensesList = () => {
+const clearExpenses = () => {
 	expenses = [];
-	renderExpensesList();
+	renderExpenses();
 	showStatusExpenses();
 	storyOutputNode.textContent = TEXT_NULL_STORY;
 }
 
 //функция изменения лимита
-let changeLimitValue = () => {
+const changeLimitValue = () => {
 	const newLimit = limitNewValueNode.value;
 
 	limitValue = parseFloat(newLimit).toFixed(2); //.toFixed(2) для отображения двух знаков после запятой
@@ -229,7 +229,7 @@ let changeLimitValue = () => {
 };
 
 //функция смены фокуса с рахода на категорию по Enter
-let changeFocusByEnter = (event) => {
+const changeFocusByEnter = (event) => {
 	if (event.keyCode === 13) {
 		event.preventDefault();
 		expensesCategoriesNode.focus();
@@ -237,16 +237,16 @@ let changeFocusByEnter = (event) => {
 };
 
 //функция добавления расходов по Enter в поле категории
-let submitExpense = (event) => {
+const submitExpense = (event) => {
 	if (event.keyCode === 13) {
 		event.preventDefault();
-		getExpenses();
+		getExpense();
 		expensesValueNode.focus();
 	};
 };
 
 //функция изменения лимита по Enter
-let changeLimitValueByEnter = (event) => {
+const changeLimitValueByEnter = (event) => {
 	if (event.keyCode === 13) {
 		event.preventDefault();
 		changeLimitValue();
@@ -254,7 +254,7 @@ let changeLimitValueByEnter = (event) => {
 };
 
 //функция при инициализации для значений по умолчанию (сразу вызывается)
-let init = () => {
+const init = () => {
 	expensesValueNode.focus();
 	storyOutputNode.textContent = TEXT_NULL_STORY;
 	limitValue = LIMIT_INIITIAL_VALUE;
@@ -263,19 +263,23 @@ let init = () => {
 };
 init();
 
+//функции открытия и закрытия модального окна
+const openDialogLimitWindow = () => dialogLimitWindow.showModal();
+const closeDialogLimitWindow = () => dialogLimitWindow.close();
+
 
 
 //! ОБРАБОТЧИКИ --------------------------------------------
 
 //добавление расходов
-inputAddButton.addEventListener('click', getExpenses);
+inputAddButton.addEventListener('click', getExpense);
 
 //открытие и закрытие модального окна
-limitOpenButton.onclick = () => dialogLimitWindow.showModal();
-limitCloseButton.onclick = () => dialogLimitWindow.close();
+limitOpenButton.addEventListener('click', openDialogLimitWindow);
+limitCloseButton.addEventListener('click', closeDialogLimitWindow);
 
 //сброс списка расходов
-storyClearButton.addEventListener('click', clearExpensesList);
+storyClearButton.addEventListener('click', clearExpenses);
 
 //задание нового лимита
 limitAddButton.addEventListener('click', changeLimitValue);
@@ -294,7 +298,7 @@ expensesCategoriesNode.addEventListener('keydown', submitExpense);
 
 //? Старые версии написания кода
 
-/*showExpensesList.forEach(element => {
+/*showexpensesBill.forEach(element => {
 	showExpensesHTML += `
 	<li class="story__list-item">${element.rate} руб. - ${element.category}</li>
 	`;
